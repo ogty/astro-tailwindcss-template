@@ -9,8 +9,7 @@ module.exports = {
     'plugin:astro/recommended',
     'standard-with-typescript'
   ],
-  overrides: [
-  ],
+  overrides: [],
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module'
