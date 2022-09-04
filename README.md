@@ -13,6 +13,12 @@ The `OneCircle.astro` file will be created in `src/components/icons` after execu
 > **Note**  
 > Component extensions and paths can be changed by rewriting `COMPONENT_EXTENSION` and `ICON_PATH` in the Makefile.
 
+## Remove modules that have not been called
+
+```zsh
+$ make unused
+```
+
 ## Directory structure directly under src
 
 ```

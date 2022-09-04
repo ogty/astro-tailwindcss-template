@@ -43,4 +43,4 @@ icon:
 	&& mv $(component_name).$(COMPONENT_EXTENSION) $(ICONS_PATH)
 
 unused:
-	@source ./tools/unused.sh
+	@chmod +x ./tools/unused && ./tools/unused ./src
