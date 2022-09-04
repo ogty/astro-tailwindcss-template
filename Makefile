@@ -1,7 +1,7 @@
 icon                ?=
 
 component_name      := $(shell echo $(icon) | awk -f ./tools/capitalizer.awk)
-ICONS_URL					  := https://raw.githubusercontent.com/twbs/icons/main/icons
+ICONS_URL           := https://raw.githubusercontent.com/twbs/icons/main/icons
 ICONS_PATH          := ./src/components/icons
 TOOLS_PATH          := ./tools
 COMPONENT_EXTENSION := astro
