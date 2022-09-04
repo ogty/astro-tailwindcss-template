@@ -7,7 +7,8 @@
       "@molecules/*": ["src/components/molecules/*"],
       "@organisms/*": ["src/components/organisms/*"],
       "@icons/*": ["src/components/icons/*"],
-      "@images/*": ["src/assets/images/*"]
+      "@images/*": ["src/assets/images/*"],
+      "@layouts/*": ["src/layouts/*"]
     }
   }
 }
