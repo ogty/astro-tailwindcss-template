@@ -57,6 +57,12 @@ $ make unused
 
 The target files are written in `TARGET_EXTENSIONS` and by default the following extensions are covered.
 
+<div align="center">
+
+  <img src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/main/icons/react.svg" width="10%" /><img src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/main/icons/react_ts.svg" width="10%" /><img src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/main/icons/astro.svg" width="10%" /><img src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/main/icons/svelte.svg" width="10%" /><img src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/main/icons/vue.svg" width="10%" />
+
+</div>
+
 - `.jsx`
 - `.tsx`
 - `.astro`
