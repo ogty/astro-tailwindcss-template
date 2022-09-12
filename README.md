@@ -18,6 +18,28 @@ $ make icon icon=1-circle
 
 The `OneCircle.astro` file will be created in `src/components/icons` after executing the above command.
 
+If you want to set the `size` props for the icon component, use `size=true`.
+
+```zsh
+$ make icon icon=1-circle size=true
+```
+
+This command will generate the following file.
+
+```astro
+---
+export interface Props {
+  size: number;
+}
+
+const { size } = Astro.props;
+---
+
+<svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} fill="currentColor" viewBox="0 0 16 16">
+  ...
+</svg>
+```
+
 > **Note**  
 > Component extensions and paths can be changed by rewriting `COMPONENT_EXTENSION` and `ICON_PATH` in the Makefile.
 
