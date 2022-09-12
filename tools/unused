@@ -8,7 +8,7 @@ DELETE=true
 DELIMITER="'"
 IGNORE_DIRS=("pages")
 IGNORE_FILES=("env.d.ts")
-TARGET_EXTENSIONS=(".js" ".jsx" ".ts" ".tsx" ".astro" ".svelte" ".vue")
+TARGET_EXTENSIONS=(".jsx" ".tsx" ".astro" ".svelte" ".vue")
 
 usingModulePaths=()
 targetFilePaths=()
