@@ -45,9 +45,25 @@ const { size } = Astro.props;
 
 ## Remove modules that have not been called
 
+Unused components can be identified and removed by executing the following commands.
+
+Rewrite `IGNORE_DIRS` and `IGNORE_FILES` in `tools/unused` for any directories or files you do not want to include.
+
 ```zsh
 $ make unused
 ```
+
+### Target extensions
+
+The target files are written in `TARGET_EXTENSIONS` and by default the following extensions are covered.
+
+- `.js`
+- `.jsx`
+- `.ts`
+- `.tsx`
+- `.astro`
+- `.svelte`
+- `.vue`
 
 ## Directory structure directly under src
 
