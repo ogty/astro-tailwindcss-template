@@ -57,9 +57,7 @@ $ make unused
 
 The target files are written in `TARGET_EXTENSIONS` and by default the following extensions are covered.
 
-- `.js`
 - `.jsx`
-- `.ts`
 - `.tsx`
 - `.astro`
 - `.svelte`
