@@ -26,6 +26,8 @@ $ make icon icon=1-circle size=true
 
 This command will generate the following file.
 
+**`src/components/icons/*.astro`**
+
 ```astro
 ---
 export interface Props {
