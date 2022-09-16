@@ -1,3 +1,18 @@
+BEGIN {
+    numbers[0] = "Zero";
+    numbers[1] = "One";
+    numbers[2] = "Two";
+    numbers[3] = "Three";
+    numbers[4] = "Four";
+    numbers[5] = "Five";
+    numbers[6] = "Six";
+    numbers[7] = "Seven";
+    numbers[8] = "Eight";
+    numbers[9] = "Nine";
+    numbers[45] = "FortyFive";
+    numbers[90] = "Ninety";
+}
+
 function capitalize(word) {
     first_character = substr(word, 0, 1);
     after_second_character = substr(word, 2);
@@ -11,18 +26,9 @@ function capitalize(word) {
 
     for (i = 1; i <= array_length; i += 1) {
         capitalized = capitalize(array[i]);
-        gsub(/90/, "Ninety", capitalized);
-        gsub(/45/, "FortyFive", capitalized);
-        gsub(/1/, "One", capitalized);
-        gsub(/2/, "Two", capitalized);
-        gsub(/3/, "Three", capitalized);
-        gsub(/4/, "Four", capitalized);
-        gsub(/5/, "Five", capitalized);
-        gsub(/6/, "Six", capitalized);
-        gsub(/7/, "Seven", capitalized);
-        gsub(/8/, "Eight", capitalized);
-        gsub(/9/, "Nine", capitalized);
-        gsub(/0/, "Zero", capitalized);
+        for (number in numbers) {
+            gsub(number, numbers[number], capitalized);
+        }
         printf(capitalized);
     }
 }
