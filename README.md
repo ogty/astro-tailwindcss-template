@@ -1,6 +1,6 @@
 <h1 align="center">Astro × Tailwind CSS Template</h1>
 
-## Setup
+## ⚙️ Setup
 
 ```zsh
 $ git clone https://github.com/ogty/astro-tailwindcss-template
@@ -8,7 +8,7 @@ $ cd astro-tailwindcss-template
 $ make setup
 ```
 
-## Icon Component Creation
+## 📷 Icon Component Creation
 
 Icons in [Bootstrap Icons](https://icons.getbootstrap.com/) can be easily converted to icon components.
 
@@ -45,7 +45,7 @@ const { size } = Astro.props;
 > **Note**  
 > Component extensions and paths can be changed by rewriting `COMPONENT_EXTENSION` and `ICON_PATH` in the Makefile.
 
-## Remove modules that have not been called
+## 🗑 Remove modules that have not been called
 
 Unused components can be identified and removed by executing the following commands.
 
@@ -61,7 +61,7 @@ The target files are written in `TARGET_EXTENSIONS` and by default the following
 
 <div align="center">
 
-  <img src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/main/icons/react.svg" width="10%" /><img src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/main/icons/react_ts.svg" width="10%" /><img src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/main/icons/astro.svg" width="10%" /><img src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/main/icons/svelte.svg" width="10%" /><img src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/main/icons/vue.svg" width="10%" />
+  <img src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/main/icons/react.svg" width="12%" /><img src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/main/icons/react_ts.svg" width="12%" /><img src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/main/icons/astro.svg" width="12%" /><img src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/main/icons/svelte.svg" width="12%" /><img src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/main/icons/vue.svg" width="12%" />
 
 </div>
 
@@ -71,7 +71,7 @@ The target files are written in `TARGET_EXTENSIONS` and by default the following
 - `.svelte`
 - `.vue`
 
-## Directory structure directly under src
+## 🌳 Directory structure directly under src
 
 ```
 src
