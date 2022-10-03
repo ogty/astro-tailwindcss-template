@@ -31,7 +31,7 @@ This command will generate the following file.
 ```astro
 ---
 export interface Props {
-	size: number;
+  size: number;
 }
 
 const { size } = Astro.props;
