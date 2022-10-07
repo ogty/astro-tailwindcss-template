@@ -1,4 +1,4 @@
-/^import.+from/ {
+/^(\t| ){1,}import.+from/ {
     split($0, splited_line, "'");
     module_path = splited_line[2];
 

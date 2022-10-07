@@ -13,10 +13,6 @@ SVELTE_PROPS        := $(shell echo '<script lang="ts">\n\texport let size\: num
 run:
 	npm run dev
 
-setup:
-	@npm install \
-	&& chmod +x $(TOOLS_PATH)/unused
-
 icon:
 	@curl -s $(ICONS_URL)/$(icon).svg -o $(component_name).$(COMPONENT_EXTENSION)
 ifeq ($(size), true)

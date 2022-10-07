@@ -8,7 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "format": "prettier --write \"src/**/*.astro\""
+    "format": "prettier --write \"src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}\""
   },
   "devDependencies": {
     "@astrojs/tailwind": "^1.0.0",
