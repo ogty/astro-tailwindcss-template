@@ -1,13 +1,5 @@
 <h1 align="center">Astro × Tailwind CSS Template</h1>
 
-## ⚙️ Setup
-
-```zsh
-$ git clone https://github.com/ogty/astro-tailwindcss-template
-$ cd astro-tailwindcss-template
-$ make setup
-```
-
 ## 📷 Icon Component Creation
 
 Icons in [Bootstrap Icons](https://icons.getbootstrap.com/) can be easily converted to icon components.
