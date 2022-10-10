@@ -5,16 +5,20 @@
 Icons in [Bootstrap Icons](https://icons.getbootstrap.com/) can be easily converted to icon components.
 
 ```zsh
-$ make icon icon=1-circle
+$ make icon name=1-circle
 ```
 
 The `OneCircle.astro` file will be created in `src/components/icons` after executing the above command.
 
-If you want to set the `size` props for the icon component, use `size=true`.
+Use `size=1` to set the `size` prop for the icon component.
+Use `color=1` to set the `color` prop for the icon component.
 
 ```zsh
-$ make icon icon=1-circle size=true
+$ make icon name=1-circle size=1
 ```
+
+> **Note**  
+> The default value is false with both size and color being 0
 
 This command will generate the following file.
 
@@ -32,6 +36,12 @@ const { size } = Astro.props;
 <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} fill="currentColor" class="bi bi-1-circle" viewBox="0 0 16 16">
   <path d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM9.283 4.002V12H7.971V5.338h-.065L6.072 6.656V5.385l1.899-1.383h1.312Z"/>
 </svg>
+```
+
+Both `size` and `color` can be used.
+
+```zsh
+$ make icon name=1-circle size=1 color=1
 ```
 
 > **Note**  
