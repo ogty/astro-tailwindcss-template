@@ -18,7 +18,7 @@ $ make icon name=1-circle size=1
 ```
 
 > **Note**  
-> The default value is false with both size and color being 0
+> The default value is false with both `size` and `color` being 0
 
 This command will generate the following file.
 
