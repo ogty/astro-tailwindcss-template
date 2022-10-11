@@ -45,8 +45,7 @@ export default function ComponentName(props: Props) {
   const { name } = props;
 
   return (
-    icon
-  );
+    icon  );
 }
 
 endef
@@ -149,8 +148,8 @@ export mergeTsxProp
 
 
 name            ?=
-size            ?= 0
-color           ?= 0
+size            ?= 1
+color           ?= 1
 ICONS_URL       := https://raw.githubusercontent.com/twbs/icons/main/icons
 ICONS_PATH      := ./src/components/icons
 TOOLS_PATH      := ./tools
@@ -188,14 +187,15 @@ ifeq ($(shell expr $(size) + $(color)), 2)
 	| sed -e 's/width="16"/width={size}/'                   \
 	| sed -e 's/height="16"/height={size}/'                 \
 	| sed -e 's/fill="currentColor"/fill={color}/'))
-	@cat $(ICONS_PATH)/$(componentFile).tmp \
-	| sed -e 's/    icon/"$(tmp)"/'         \
-	| sed -e 's/16">   /16">\n/'            \
-	| sed -e 's/\/>/\/>\n/'                 \
-	| sed -e 's/"<svg/    <svg/'            \
-	| sed -e 's/<\/svg>"/   <\/svg>/'       \
-	| sed -e 's/<path/      <path/'         \
-	> $(ICONS_PATH)/$(componentFile)        \
+	@cat $(ICONS_PATH)/$(componentFile).tmp      \
+	| sed -e 's/    icon/"$(tmp)"/'              \
+	| sed -e 's/16">   /16">\n/'                 \
+	| sed -e 's/\/>/\/>\n/'                      \
+	| sed -e 's/"<svg/    <svg/'                 \
+	| sed -e 's/<\/svg>"/   <\/svg>/'            \
+	| sed -e 's/<path/      <path/'              \
+	| sed -e 's/ComponentName/$(componentName)/' \
+	> $(ICONS_PATH)/$(componentFile)             \
 	&& rm $(ICONS_PATH)/$(componentFile).tmp
 	@sed -i "" -e 's/<\/svg>/<\/svg>\n/' $(ICONS_PATH)/$(componentFile)
 endif
