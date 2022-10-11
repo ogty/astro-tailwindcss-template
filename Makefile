@@ -119,15 +119,10 @@ END {
 endef
 export mergeAstroProp
 
-define diffMergeAstroProp
+define diffMergeProp
 	@echo $1 | (echo $2 | diff -DVERSION1 /dev/fd/3 -) 3<&0
 endef
-export diffMergeAstroProp
-
-define diffMergeTsxProp
-	@echo $1 | (echo $2 | diff -DVERSION1 /dev/fd/3 -) 3<&0
-endef
-export diffMergeTsxProp
+export diffMergeProp
 
 define mergeTsxProp
 BEGIN {
@@ -159,7 +154,7 @@ color           ?= 0
 ICONS_URL       := https://raw.githubusercontent.com/twbs/icons/main/icons
 ICONS_PATH      := ./src/components/icons
 TOOLS_PATH      := ./tools
-COMPONENT_TYPE  := tsx
+COMPONENT_TYPE  := astro
 componentName   := $(shell echo $(name) | awk '$(capitalizer)')
 componentFile   := $(shell echo $(componentName).$(COMPONENT_TYPE))
 astroSizeProp   := $(call astroReplace,size,number)
@@ -182,11 +177,11 @@ unused:
 icon:
 ifeq ($(COMPONENT_TYPE), tsx)
 ifeq ($(shell expr $(size) + $(color)), 2)
-	@$(call diffMergeAstroProp,$(tsxSizeProp),$(tsxColorProp)) \
-	| grep -v '^#if'                                           \
-	| grep -v '^#endif'                                        \
-	| grep -v '^#else'                                         \
-	| awk "$$mergeTsxProp"                                     \
+	@$(call diffMergeProp,$(tsxSizeProp),$(tsxColorProp)) \
+	| grep -v '^#if'                                      \
+	| grep -v '^#endif'                                   \
+	| grep -v '^#else'                                    \
+	| awk "$$mergeTsxProp"                                \
 	> $(ICONS_PATH)/$(componentFile).tmp
 	@$(eval tmp := $(shell curl -s $(ICONS_URL)/${name}.svg \
 	| sed -e 's/\//\\\//g' -e 's/\./\\./g'                  \
@@ -202,15 +197,16 @@ ifeq ($(shell expr $(size) + $(color)), 2)
 	| sed -e 's/<path/      <path/'         \
 	> $(ICONS_PATH)/$(componentFile)        \
 	&& rm $(ICONS_PATH)/$(componentFile).tmp
+	@sed -i "" -e 's/<\/svg>/<\/svg>\n/' $(ICONS_PATH)/$(componentFile)
 endif
 endif
 ifeq ($(COMPONENT_TYPE), astro)
 ifeq ($(shell expr $(size) + $(color)), 2)
-	@$(call diffMergeAstroProp,$(astroSizeProp),$(astroColorProp)) \
-	| grep -v '^#if'                                               \
-	| grep -v '^#endif'                                            \
-	| grep -v '^#else'                                             \
-	| awk "$$mergeAstroProp"                                       \
+	@$(call diffMergeProp,$(astroSizeProp),$(astroColorProp)) \
+	| grep -v '^#if'                                          \
+	| grep -v '^#endif'                                       \
+	| grep -v '^#else'                                        \
+	| awk "$$mergeAstroProp"                                  \
 	> $(ICONS_PATH)/$(componentFile)
 	@curl -s $(ICONS_URL)/$(name).svg              \
 	| sed -e 's/width="16"/width={size}/'          \
@@ -235,6 +231,7 @@ ifeq ($(shell expr $(size) + $(color)), 0)
 	@curl -s $(ICONS_URL)/$(name).svg -o $(ICONS_PATH)/$(componentFile)
 endif
 endif
+	@sed -i "" -e 's/<\/svg>/<\/svg>\n/' $(ICONS_PATH)/$(componentFile)
 endif
 ifeq ($(COMPONENT_TYPE), svelte)
 ifeq ($(shell expr $(size) + $(color)), 2)
@@ -266,5 +263,6 @@ ifeq ($(shell expr $(size) + $(color)), 0)
 	@curl -s $(ICONS_URL)/$(name).svg -o $(ICONS_PATH)/$(componentFile)
 endif
 endif
-endif
 	@sed -i "" -e 's/<\/svg>/<\/svg>\n/' $(ICONS_PATH)/$(componentFile)
+endif
+	@:
