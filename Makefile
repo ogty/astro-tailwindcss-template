@@ -1,37 +1,37 @@
 define capitalizer
 BEGIN {
-    numbers[0] = "Zero";
-    numbers[1] = "One";
-    numbers[2] = "Two";
-    numbers[3] = "Three";
-    numbers[4] = "Four";
-    numbers[5] = "Five";
-    numbers[6] = "Six";
-    numbers[7] = "Seven";
-    numbers[8] = "Eight";
-    numbers[9] = "Nine";
-    numbers[45] = "FortyFive";
-    numbers[90] = "Ninety";
+  numbers[0] = "Zero";
+  numbers[1] = "One";
+  numbers[2] = "Two";
+  numbers[3] = "Three";
+  numbers[4] = "Four";
+  numbers[5] = "Five";
+  numbers[6] = "Six";
+  numbers[7] = "Seven";
+  numbers[8] = "Eight";
+  numbers[9] = "Nine";
+  numbers[45] = "FortyFive";
+  numbers[90] = "Ninety";
 }
 
 function capitalize(word) {
-    first_character = substr(word, 0, 1);
-    after_second_character = substr(word, 2);
-    capitalized = sprintf("%s%s", toupper(first_character), after_second_character);
-    return capitalized;
+  first_character = substr(word, 0, 1);
+  after_second_character = substr(word, 2);
+  capitalized = sprintf("%s%s", toupper(first_character), after_second_character);
+  return capitalized;
 }
                                                                                          
 {
-    split($$0, array, "-");
-    array_length = length(array);
+  split($$0, array, "-");
+  array_length = length(array);
 
-    for (i = 1; i <= array_length; i += 1) {
-        capitalized = capitalize(array[i]);
-        for (number in numbers) {
-            gsub(number, numbers[number], capitalized);
-        }
-        printf(capitalized);
+  for (i = 1; i <= array_length; i += 1) {
+    capitalized = capitalize(array[i]);
+    for (number in numbers) {
+      gsub(number, numbers[number], capitalized);
     }
+    printf(capitalized);
+  }
 }
 endef
 export capitalizer
@@ -97,15 +97,15 @@ BEGIN {
 }
 
 /^$$/,/---/ {
-    if (count == 0) {
-        printf("\nconst { ");
-    } else if (count == 1) {
-        printf($$3)
-    } else if (count == 2) {
-        printf(", %s", $$3);
-    }
-    count += 1;
-    next;
+  if (count == 0) {
+    printf("\nconst { ");
+  } else if (count == 1) {
+    printf($$3)
+  } else if (count == 2) {
+    printf(", %s", $$3);
+  }
+  count += 1;
+  next;
 }
 
 {
@@ -125,23 +125,23 @@ export diffMergeProp
 
 define mergeTsxProp
 BEGIN {
-    count = 0;
+  count = 0;
 }
 
 /^export default function/,/^$$/ {
-    if (count == 0) {
-        print($$0);
-    } else if (count == 1) {
-        printf("  const { %s", $$3)
-    } else if (count == 2) {
-        printf(", %s } = props;\n\n", $$3);
-    }
-    count += 1;
-    next;
+  if (count == 0) {
+    print($$0);
+  } else if (count == 1) {
+  	printf("  const { %s", $$3)
+  } else if (count == 2) {
+    printf(", %s } = props;\n\n", $$3);
+  }
+  count += 1;
+  next;
 }
 
 {
-    print($$0);
+  print($$0);
 }
 endef
 export mergeTsxProp
