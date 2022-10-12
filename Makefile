@@ -150,12 +150,14 @@ export mergeTsxProp
 name            ?=
 size            ?= 1
 color           ?= 1
+props           ?= false  # svelte only
 ICONS_URL       := https://raw.githubusercontent.com/twbs/icons/main/icons
-ICONS_PATH      := ./src/components/icons
-TOOLS_PATH      := ./tools
+ICONS_DIR       := ./src/components/icons
+TOOLS_DIR       := ./tools
 COMPONENT_TYPE  := astro
 componentName   := $(shell echo $(name) | awk '$(capitalizer)')
 componentFile   := $(shell echo $(componentName).$(COMPONENT_TYPE))
+icon_path       := $(ICONS_DIR)/$(componentFile)
 astroSizeProp   := $(call astroReplace,size,number)
 astroColorProp  := $(call astroReplace,color,string)
 svelteSizeProp  := $(call svelteReplace,size,number)
@@ -171,7 +173,7 @@ build:
 	npm run build
 
 unused:
-	@$(TOOLS_PATH)/unused ./src
+	@$(TOOLS_DIR)/unused ./src
 
 icon:
 ifeq ($(COMPONENT_TYPE), tsx)
@@ -181,13 +183,13 @@ ifeq ($(shell expr $(size) + $(color)), 2)
 	| grep -v '^#endif'                                   \
 	| grep -v '^#else'                                    \
 	| awk "$$mergeTsxProp"                                \
-	> $(ICONS_PATH)/$(componentFile).tmp
+	> $(icon_path).tmp
 	@$(eval tmp := $(shell curl -s $(ICONS_URL)/${name}.svg \
 	| sed -e 's/\//\\\//g' -e 's/\./\\./g'                  \
 	| sed -e 's/width="16"/width={size}/'                   \
 	| sed -e 's/height="16"/height={size}/'                 \
 	| sed -e 's/fill="currentColor"/fill={color}/'))
-	@cat $(ICONS_PATH)/$(componentFile).tmp      \
+	@cat $(icon_path).tmp                        \
 	| sed -e 's/    icon/"$(tmp)"/'              \
 	| sed -e 's/16">   /16">\n/'                 \
 	| sed -e 's/\/>/\/>\n/'                      \
@@ -195,9 +197,9 @@ ifeq ($(shell expr $(size) + $(color)), 2)
 	| sed -e 's/<\/svg>"/   <\/svg>/'            \
 	| sed -e 's/<path/      <path/'              \
 	| sed -e 's/ComponentName/$(componentName)/' \
-	> $(ICONS_PATH)/$(componentFile)             \
-	&& rm $(ICONS_PATH)/$(componentFile).tmp
-	@sed -i "" -e 's/<\/svg>/<\/svg>\n/' $(ICONS_PATH)/$(componentFile)
+	> $(icon_path)                               \
+	&& rm $(icon_path).tmp
+	@sed -i "" -e 's/<\/svg>/<\/svg>\n/' $(icon_path)
 endif
 endif
 ifeq ($(COMPONENT_TYPE), astro)
@@ -207,31 +209,31 @@ ifeq ($(shell expr $(size) + $(color)), 2)
 	| grep -v '^#endif'                                       \
 	| grep -v '^#else'                                        \
 	| awk "$$mergeAstroProp"                                  \
-	> $(ICONS_PATH)/$(componentFile)
+	> $(icon_path)
 	@curl -s $(ICONS_URL)/$(name).svg              \
 	| sed -e 's/width="16"/width={size}/'          \
 	| sed -e 's/height="16"/height={size}/'        \
 	| sed -e 's/fill="currentColor"/fill={color}/' \
-	>> $(ICONS_PATH)/$(componentFile)
+	>> $(icon_path)
 else
 ifeq ($(size), 1)
-	@echo $(astroSizeProp) > $(ICONS_PATH)/$(componentFile)
+	@echo $(astroSizeProp) > $(icon_path)
 	@curl -s $(ICONS_URL)/$(name).svg       \
 	| sed -e 's/width="16"/width={size}/'   \
 	| sed -e 's/height="16"/height={size}/' \
-	>> $(ICONS_PATH)/$(componentFile)
+	>> $(icon_path)
 endif
 ifeq ($(color), 1)
-	@echo $(astroColorProp) > $(ICONS_PATH)/$(componentFile)
+	@echo $(astroColorProp) > $(icon_path)
 	@curl -s $(ICONS_URL)/$(name).svg              \
 	| sed -e 's/fill="currentColor"/fill={color}/' \
-	>> $(ICONS_PATH)/$(componentFile)
+	>> $(icon_path)
 endif
 ifeq ($(shell expr $(size) + $(color)), 0)
-	@curl -s $(ICONS_URL)/$(name).svg -o $(ICONS_PATH)/$(componentFile)
+	@curl -s $(ICONS_URL)/$(name).svg -o $(icon_path)
 endif
 endif
-	@sed -i "" -e 's/<\/svg>/<\/svg>\n/' $(ICONS_PATH)/$(componentFile)
+	@sed -i "" -e 's/<\/svg>/<\/svg>\n/' $(icon_path)
 endif
 ifeq ($(COMPONENT_TYPE), svelte)
 ifeq ($(shell expr $(size) + $(color)), 2)
@@ -239,30 +241,36 @@ ifeq ($(shell expr $(size) + $(color)), 2)
 	| grep -v '^#if'                                              \
 	| grep -v '^#endif'                                           \
 	| grep -v '^#else'                                            \
-	> $(ICONS_PATH)/$(componentFile)
+	> $(icon_path)
 	@curl -s $(ICONS_URL)/$(name).svg              \
 	| sed -e 's/width="16"/width={size}/'          \
 	| sed -e 's/height="16"/height={size}/'        \
 	| sed -e 's/fill="currentColor"/fill={color}/' \
-	>> $(ICONS_PATH)/$(componentFile)
+	>> $(icon_path)
 else
 ifeq ($(size), 1)
-	@echo $(svelteSizeProp) > $(ICONS_PATH)/$(componentFile)
+	@echo $(svelteSizeProp) > $(icon_path)
 	@curl -s $(ICONS_URL)/$(name).svg       \
 	| sed -e 's/width="16"/width={size}/'   \
 	| sed -e 's/height="16"/height={size}/' \
-	>> $(ICONS_PATH)/$(componentFile)
+	>> $(icon_path)
 endif
 ifeq ($(color), 1)
-	@echo $(svelteColorProp) > $(ICONS_PATH)/$(componentFile)
+	@echo $(svelteColorProp) > $(icon_path)
 	@curl -s $(ICONS_URL)/$(name).svg              \
 	| sed -e 's/fill="currentColor"/fill={color}/' \
-	>> $(ICONS_PATH)/$(componentFile)
+	>> $(icon_path)
 endif
 ifeq ($(shell expr $(size) + $(color)), 0)
-	@curl -s $(ICONS_URL)/$(name).svg -o $(ICONS_PATH)/$(componentFile)
+	@curl -s $(ICONS_URL)/$(name).svg -o $(icon_path)
 endif
 endif
-	@sed -i "" -e 's/<\/svg>/<\/svg>\n/' $(ICONS_PATH)/$(componentFile)
+ifeq ($(props), true)
+	@cat $(icon_path)                         \
+	| sed -e 's/<svg/<svg {\.\.\.$$$$props}/' \
+	> $(icon_path).tmp                        \
+	&& mv $(icon_path).tmp $(icon_path)
+endif
+	@sed -i "" -e 's/<\/svg>/<\/svg>\n/' $(icon_path)
 endif
 	@:
