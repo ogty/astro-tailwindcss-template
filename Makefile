@@ -20,7 +20,7 @@ function capitalize(word) {
   capitalized = sprintf("%s%s", toupper(first_character), after_second_character);
   return capitalized;
 }
-                                                                                         
+
 {
   split($$0, array, "-");
   array_length = length(array);
@@ -171,6 +171,9 @@ run:
 
 build:
 	npm run build
+
+format:
+	npm run format
 
 unused:
 	@$(TOOLS_DIR)/unused ./src
