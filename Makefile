@@ -66,7 +66,7 @@ export svelteTemplate
 
 define svelteReplace
 	echo "$$svelteTemplate" | sed -e 's/name/$1/g' -e 's/type/$2/g' | sed -e 's/echo //'
-endef 
+endef
 export svelteReplace
 
 define mergeSvelteProp
@@ -166,7 +166,7 @@ tsxColorProp    := $(call tsxReplace,color,string)
 tsxSizeProp     := $(call tsxReplace,size,number)
 
 
-run:
+run: format
 	npm run dev
 
 build:
